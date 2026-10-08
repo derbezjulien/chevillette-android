@@ -39,9 +39,6 @@ export default function ConditionsUtilisation() {
             <Section title="Utilisation de l'application">
               <p>L'utilisateur s'engage à utiliser l'application à des fins personnelles et licites. Il est responsable de l'exactitude des informations qu'il saisit (adresse, surface, type de bien).</p>
             </Section>
-            <Section title="Comptes">
-              <p>La création d'un compte peut être proposée. L'utilisateur est responsable de la confidentialité de ses identifiants. [À COMPLÉTER — conditions spécifiques au compte si applicable]</p>
-            </Section>
             <Section title="Propriété intellectuelle">
               <p>Les éléments de l'application (textes, logos, charte graphique) sont la propriété de leur auteur. Toute reproduction, même partielle, est soumise à autorisation préalable.</p>
             </Section>
@@ -56,9 +53,6 @@ export default function ConditionsUtilisation() {
             </Section>
             <Section title="Droit applicable et litiges">
               <p>Les présentes conditions sont régies par le droit français. En cas de litige, [À COMPLÉTER — modalité de résolution : tentative de résolution amiable, juridiction compétente].</p>
-            </Section>
-            <Section title="Contact">
-              <p>Pour toute question relative aux présentes conditions : [À COMPLÉTER — e-mail de contact]</p>
             </Section>
           </CardContent>
         </Card>

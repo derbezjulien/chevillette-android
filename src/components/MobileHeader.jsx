@@ -5,33 +5,23 @@ import { ChevronLeft, Home as HomeIcon } from "lucide-react";
 const ROUTES = [
   "/",
   "/estimation",
-  "/settings",
   "/mentions-legales",
   "/confidentialite",
   "/conditions-utilisation",
-  "/login",
-  "/register",
-  "/forgot-password",
-  "/reset-password",
 ];
 const TITLES = {
   "/": "L'Indice Immo",
   "/estimation": "Estimation",
-  "/settings": "Paramètres",
   "/mentions-legales": "Mentions Légales",
   "/confidentialite": "Confidentialité",
   "/conditions-utilisation": "Conditions d'utilisation",
-  "/login": "Connexion",
-  "/register": "Inscription",
-  "/forgot-password": "Mot de passe oublié",
-  "/reset-password": "Réinitialisation",
 };
 
 export default function MobileHeader() {
   const navigate = useNavigate();
   const location = useLocation();
   if (!ROUTES.includes(location.pathname)) return null;
-  const TAB_ROOTS = ["/", "/estimation", "/settings"];
+  const TAB_ROOTS = ["/", "/estimation"];
   const canBack = !TAB_ROOTS.includes(location.pathname);
   const isHome = location.pathname === "/";
 

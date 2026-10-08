@@ -29,7 +29,6 @@ export default function MentionsLegales() {
             <Section title="Éditeur de la publication">
               <p>Le présent site est édité par : [À COMPLÉTER — nom de l'éditeur]</p>
               <p>Adresse : [À COMPLÉTER]</p>
-              <p>E-mail : [À COMPLÉTER]</p>
               <p>Forme juridique : [À COMPLÉTER]</p>
               <p>Capital social : [À COMPLÉTER]</p>
               <p>Numéro SIRET : [À COMPLÉTER]</p>

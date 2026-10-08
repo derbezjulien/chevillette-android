@@ -1,12 +1,11 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home as HomeIcon, Calculator, Settings as SettingsIcon } from "lucide-react";
+import { Home as HomeIcon, Calculator } from "lucide-react";
 
-const ROUTES = ["/", "/estimation", "/settings"];
+const ROUTES = ["/", "/estimation"];
 const TABS = [
   { path: "/", label: "Accueil", Icon: HomeIcon },
   { path: "/estimation", label: "Estimation", Icon: Calculator },
-  { path: "/settings", label: "Réglages", Icon: SettingsIcon },
 ];
 
 export default function MobileNav() {
