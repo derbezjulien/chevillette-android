@@ -31,7 +31,8 @@ export default function MobileHeader() {
   const navigate = useNavigate();
   const location = useLocation();
   if (!ROUTES.includes(location.pathname)) return null;
-  const canBack = location.pathname !== "/";
+  const TAB_ROOTS = ["/", "/estimation", "/settings"];
+  const canBack = !TAB_ROOTS.includes(location.pathname);
   const isHome = location.pathname === "/";
 
   return (

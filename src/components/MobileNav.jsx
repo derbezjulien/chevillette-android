@@ -30,7 +30,7 @@ export default function MobileNav() {
                 if (location.pathname === path) {
                   window.scrollTo({ top: 0, behavior: "smooth" });
                 } else {
-                  navigate(path);
+                  navigate(path, { replace: true });
                 }
               }}
               className="flex-1 flex flex-col items-center gap-1 py-2"
