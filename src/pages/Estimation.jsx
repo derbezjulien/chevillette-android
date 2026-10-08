@@ -13,7 +13,6 @@ import VetusteSlider from "@/components/VetusteSlider";
 import PullToRefresh from "@/components/PullToRefresh";
 import LegalLinks from "@/components/LegalLinks";
 import { useEstimationForm } from "@/context/EstimationFormContext";
-import DownloadAttestationButton from "@/components/DownloadAttestationButton";
 import useSeo from "@/hooks/use-seo";
 
 const euro = new Intl.NumberFormat("fr-FR", {
@@ -443,24 +442,9 @@ export default function Estimation() {
               </CardContent>
             </Card>
 
-            <div className="mb-8">
-              <DownloadAttestationButton
-                data={{
-                  address: selected?.properties?.label,
-                  propertyType,
-                  surface,
-                  terrainSurface,
-                  vetuste,
-                  estimatedPrice: result.estimatedPrice,
-                  fallback: result.fallback,
-                  fallbackCommune: result.fallbackCommune,
-                }}
-              />
-            </div>
-
             {!result.fallback && (
               <>
-                <h2 className="text-xl font-heading font-semibold mb-4 text-primary flex items-center gap-2">
+                <h2 className="text-xl font-heading font-semibold mt-8 mb-4 text-primary flex items-center gap-2">
                   <span className="inline-block w-1.5 h-5 rounded-full bg-accent" />
                   Ventes récentes dans la commune
                 </h2>
