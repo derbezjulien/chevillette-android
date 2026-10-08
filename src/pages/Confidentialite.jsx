@@ -14,7 +14,7 @@ function Section({ title, children }) {
 }
 
 export default function Confidentialite() {
-  useSeo({ title: "Politique de confidentialité | L'Indice Immo", description: "Politique de confidentialité de L'Indice Immo : données collectées, finalité, conservation et droits RGPD.", path: "/confidentialite" });
+  useSeo({ title: "Politique de confidentialité | L'Indice Immo", description: "Politique de confidentialité de L'Indice Immo : collecte des données, cookies, analytics et droits RGPD.", path: "/confidentialite" });
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-3xl mx-auto px-6 py-10">
@@ -26,23 +26,25 @@ export default function Confidentialite() {
             <CardTitle className="text-2xl">Politique de confidentialité</CardTitle>
           </CardHeader>
           <CardContent>
-            <Section title="Responsable du traitement">
-              <p>Le responsable du traitement des données est : [À COMPLÉTER — nom de l'éditeur]</p>
+            <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+              La protection de vos données personnelles est une priorité pour L'Indice Immo. Cette page vous explique comment nous traitons vos données lors de votre navigation sur www.indiceimmo.org.
+            </p>
+            <Section title="Collecte des données">
+              <p>L'utilisation de l'outil d'estimation est gratuite et ne nécessite pas la création d'un compte utilisateur. Les données que vous saisissez dans le formulaire (adresse du bien, surface, état) sont traitées instantanément par notre algorithme pour générer l'estimation. Ces données ne sont ni sauvegardées dans nos bases de données, ni revendues à des tiers. L'adresse saisie n'est conservée que le temps de votre session de navigation pour vous afficher le résultat.</p>
             </Section>
-            <Section title="Finalité">
-              <p>Les données servent à l'accès aux fonctionnalités d'estimation immobilière.</p>
+            <Section title="Utilisation des Cookies et Publicité (Google AdSense)">
+              <p>Pour maintenir la gratuité de ce service, notre site utilise la régie publicitaire Google AdSense. Google et ses partenaires utilisent des cookies et d'autres technologies de suivi pour diffuser des annonces pertinentes en fonction de votre historique de navigation sur notre site et/ou sur d'autres sites web.</p>
+              <p>Les cookies publicitaires permettent à Google et à ses partenaires de diffuser des annonces ciblées.</p>
+              <p>Vous pouvez désactiver la publicité personnalisée en accédant aux Paramètres des annonces Google.</p>
             </Section>
-            <Section title="Vos droits">
-              <p>Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression de vos données.</p>
+            <Section title="Données de navigation (Analytics)">
+              <p>Nous pouvons être amenés à utiliser des outils de mesure d'audience anonymes pour comprendre comment notre site est utilisé et l'améliorer (pages visitées, temps passé, type d'appareil). Ces données sont anonymisées et ne permettent pas de vous identifier personnellement.</p>
             </Section>
-            <Section title="Sources de données utilisées">
-              <p>L'application interroge des données publiques pour produire ses estimations :</p>
-              <p>• Base Adresse Nationale (BAN) — recherche d'adresses ;</p>
-              <p>• Demandes de Valeurs Foncières (DVF, data.gouv.fr) — ventes enregistrées.</p>
-              <p>Ces données ne sont pas stockées durablement au-delà d'un cache temporaire nécessaire au fonctionnement du service.</p>
+            <Section title="Vos droits (RGPD)">
+              <p>Conformément à la réglementation européenne (RGPD) et à la loi Informatique et Libertés, bien que nous ne stockions pas de données personnelles nominatives via notre formulaire d'estimation, vous disposez d'un droit d'accès, de rectification et d'effacement des données qui pourraient vous concerner. Pour exercer ce droit, vous pouvez nous contacter à l'adresse suivante : derbez.julien@indiceimmo.org</p>
             </Section>
-            <Section title="Cookies">
-              <p>L'application n'utilise pas de cookies publicitaires. Seuls les cookies techniques nécessaires à son fonctionnement peuvent être déposés.</p>
+            <Section title="Modification de la politique de confidentialité">
+              <p>L'éditeur se réserve le droit de modifier la présente politique de confidentialité à tout moment, notamment en fonction de l'évolution de la législation.</p>
             </Section>
           </CardContent>
         </Card>
