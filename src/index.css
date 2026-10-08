@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 39 59% 98%;
+    --foreground: 217 33% 17%;
+    --card: 0 0% 100%;
+    --card-foreground: 217 33% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 217 33% 17%;
+    --primary: 217 33% 17%;
+    --primary-foreground: 39 59% 98%;
+    --secondary: 39 30% 94%;
+    --secondary-foreground: 217 33% 17%;
+    --muted: 39 30% 94%;
+    --muted-foreground: 217 10% 42%;
+    --accent: 45 67% 48%;
+    --accent-foreground: 217 33% 17%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 39 25% 90%;
+    --input: 39 25% 90%;
+    --ring: 45 67% 48%;
+    --chart-1: 217 33% 17%;
+    --chart-2: 45 67% 48%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.875rem;
+    --font-heading: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    --font-body: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    --font-display: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+    --font-serif: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', serif;
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sidebar-background: 39 59% 98%;
+    --sidebar-foreground: 217 33% 17%;
+    --sidebar-primary: 217 33% 17%;
+    --sidebar-primary-foreground: 39 59% 98%;
+    --sidebar-accent: 39 30% 94%;
+    --sidebar-accent-foreground: 217 33% 17%;
+    --sidebar-border: 39 25% 90%;
+    --sidebar-ring: 45 67% 48%;
+  }
+
+  .dark {
+    --background: 217 33% 11%;
+    --foreground: 39 59% 96%;
+    --card: 217 33% 14%;
+    --card-foreground: 39 59% 96%;
+    --popover: 217 33% 14%;
+    --popover-foreground: 39 59% 96%;
+    --primary: 39 59% 96%;
+    --primary-foreground: 217 33% 11%;
+    --secondary: 217 20% 20%;
+    --secondary-foreground: 39 59% 96%;
+    --muted: 217 20% 20%;
+    --muted-foreground: 217 10% 65%;
+    --accent: 45 67% 55%;
+    --accent-foreground: 217 33% 11%;
+    --destructive: 0 62% 45%;
+    --destructive-foreground: 39 59% 96%;
+    --border: 217 20% 22%;
+    --input: 217 20% 22%;
+    --ring: 45 67% 55%;
+    --chart-1: 217 33% 17%;
+    --chart-2: 45 67% 48%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 217 33% 11%;
+    --sidebar-foreground: 39 59% 96%;
+    --sidebar-primary: 45 67% 55%;
+    --sidebar-primary-foreground: 217 33% 11%;
+    --sidebar-accent: 217 20% 20%;
+    --sidebar-accent-foreground: 39 59% 96%;
+    --sidebar-border: 217 20% 22%;
+    --sidebar-ring: 45 67% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    overscroll-behavior-y: none;
+  }
+
+  /* Empêche le surlignage/la sélection sur les éléments interactifs (WebView Android) */
+  button,
+  input,
+  textarea,
+  [role="tab"] {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
