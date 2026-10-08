@@ -32,11 +32,6 @@ export default function Confidentialite() {
             <Section title="Collecte des données">
               <p>L'utilisation de l'outil d'estimation est gratuite et ne nécessite pas la création d'un compte utilisateur. Les données que vous saisissez dans le formulaire (adresse du bien, surface, état) sont traitées instantanément par notre algorithme pour générer l'estimation. Ces données ne sont ni sauvegardées dans nos bases de données, ni revendues à des tiers. L'adresse saisie n'est conservée que le temps de votre session de navigation pour vous afficher le résultat.</p>
             </Section>
-            <Section title="Utilisation des Cookies et Publicité (Google AdSense)">
-              <p>Pour maintenir la gratuité de ce service, notre site utilise la régie publicitaire Google AdSense. Google et ses partenaires utilisent des cookies et d'autres technologies de suivi pour diffuser des annonces pertinentes en fonction de votre historique de navigation sur notre site et/ou sur d'autres sites web.</p>
-              <p>Les cookies publicitaires permettent à Google et à ses partenaires de diffuser des annonces ciblées.</p>
-              <p>Vous pouvez désactiver la publicité personnalisée en accédant aux Paramètres des annonces Google.</p>
-            </Section>
             <Section title="Données de navigation (Analytics)">
               <p>Nous pouvons être amenés à utiliser des outils de mesure d'audience anonymes pour comprendre comment notre site est utilisé et l'améliorer (pages visitées, temps passé, type d'appareil). Ces données sont anonymisées et ne permettent pas de vous identifier personnellement.</p>
             </Section>
