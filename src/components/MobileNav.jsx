@@ -26,7 +26,13 @@ export default function MobileNav() {
             <button
               key={path}
               type="button"
-              onClick={() => navigate(path)}
+              onClick={() => {
+                if (location.pathname === path) {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                } else {
+                  navigate(path);
+                }
+              }}
               className="flex-1 flex flex-col items-center gap-1 py-2"
             >
               <Icon className={`w-5 h-5 ${active ? "text-accent" : "text-muted-foreground"}`} />

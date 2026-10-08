@@ -18,7 +18,7 @@ export default function Confidentialite() {
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-3xl mx-auto px-6 py-10">
-        <Link to="/" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-accent mb-6">
+        <Link to="/" className="hidden md:inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-accent mb-6">
           <ArrowLeft className="w-4 h-4" /> Retour à l'accueil
         </Link>
         <Card className="shadow-soft">
