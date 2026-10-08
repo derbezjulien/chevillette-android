@@ -21,7 +21,7 @@ export default function MobileHeader() {
       className="md:hidden sticky top-0 z-30 bg-card/90 backdrop-blur-sm border-b border-border/60"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
-      <div className="flex items-center justify-between px-2 py-4">
+      <div className="flex items-center justify-between py-4" style={{ paddingLeft: "calc(env(safe-area-inset-left) + 0.5rem)", paddingRight: "calc(env(safe-area-inset-right) + 0.5rem)" }}>
         <button
           type="button"
           onClick={() => canBack && navigate(-1)}

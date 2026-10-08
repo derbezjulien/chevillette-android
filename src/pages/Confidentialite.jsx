@@ -56,9 +56,6 @@ export default function Confidentialite() {
             <Section title="Cookies">
               <p>L'application n'utilise pas de cookies publicitaires. Seuls les cookies techniques nécessaires à son fonctionnement (session d'authentification) peuvent être déposés.</p>
             </Section>
-            <Section title="Publicité">
-              <p>[À COMPLÉTER — Ce paragraphe devra être renseigné avant toute activation d'une régie publicitaire (ex. Google AdSense). Il précisera la nature des publicités affichées, les cookies associés et les moyens de s'y opposer.]</p>
-            </Section>
           </CardContent>
         </Card>
       </main>

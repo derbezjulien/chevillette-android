@@ -19,7 +19,7 @@ export default function MobileNav() {
       className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-card/95 backdrop-blur-sm border-t border-border/60"
       style={{ paddingBottom: "env(safe-area-inset-bottom)" }}
     >
-      <div className="flex">
+      <div className="flex" style={{ paddingLeft: "env(safe-area-inset-left)", paddingRight: "env(safe-area-inset-right)" }}>
         {TABS.map(({ path, label, Icon }) => {
           const active = location.pathname === path;
           return (

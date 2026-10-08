@@ -20,6 +20,10 @@ import ForgotPassword from '@/pages/ForgotPassword';
 import ResetPassword from '@/pages/ResetPassword';
 import MentionsLegales from '@/pages/MentionsLegales';
 import Confidentialite from '@/pages/Confidentialite';
+import ConditionsUtilisation from '@/pages/ConditionsUtilisation';
+import AnimatedLayout from '@/components/AnimatedLayout';
+import { EstimationFormProvider } from '@/context/EstimationFormContext';
+import { MotionConfig } from 'framer-motion';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -47,20 +51,25 @@ const AuthenticatedApp = () => {
 
   // Render the main app
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/estimation" element={<Estimation />} />
-      <Route path="/mentions-legales" element={<MentionsLegales />} />
-      <Route path="/confidentialite" element={<Confidentialite />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password" element={<ResetPassword />} />
-      <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
-        <Route path="/settings" element={<Settings />} />
-      </Route>
-      <Route path="*" element={<PageNotFound />} />
-    </Routes>
+    <EstimationFormProvider>
+      <Routes>
+        <Route element={<AnimatedLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/estimation" element={<Estimation />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/confidentialite" element={<Confidentialite />} />
+          <Route path="/conditions-utilisation" element={<ConditionsUtilisation />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route element={<ProtectedRoute unauthenticatedElement={<Navigate to="/login" replace />} />}>
+            <Route path="/settings" element={<Settings />} />
+          </Route>
+        </Route>
+        <Route path="*" element={<PageNotFound />} />
+      </Routes>
+    </EstimationFormProvider>
   );
 };
 
@@ -69,6 +78,7 @@ function App() {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+      <MotionConfig reducedMotion="user">
       <AuthProvider>
         <QueryClientProvider client={queryClientInstance}>
           <Router>
@@ -84,6 +94,7 @@ function App() {
           <Toaster />
         </QueryClientProvider>
       </AuthProvider>
+      </MotionConfig>
     </ThemeProvider>
   )
 }

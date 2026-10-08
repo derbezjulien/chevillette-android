@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Home as HomeIcon, MapPin, Calculator, Loader2, AlertCircle, Building2, Sparkles, TrendingUp, Trees } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -9,8 +9,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import SaleDetailDialog from "@/components/SaleDetailDialog";
-import AdBanner from "@/components/AdBanner";
 import VetusteSlider from "@/components/VetusteSlider";
+import PullToRefresh from "@/components/PullToRefresh";
+import LegalLinks from "@/components/LegalLinks";
+import { useEstimationForm } from "@/context/EstimationFormContext";
 import DownloadAttestationButton from "@/components/DownloadAttestationButton";
 import useSeo from "@/hooks/use-seo";
 
@@ -70,19 +72,40 @@ function computeTerrainValue(surfaceTerrain, prixMoyen) {
 export default function Estimation() {
   useSeo({ title: "Estimer mon bien gratuitement : prix au m² | L'Indice Immo", description: "Indiquez adresse, surface et état de votre bien : obtenez gratuitement une valeur indicative d'après les ventes récentes de votre commune (DVF).", path: "/estimation" });
   const { toast } = useToast();
-  const [query, setQuery] = useState("");
+  const { form, update } = useEstimationForm();
+  const [query, setQuery] = useState(form.query ?? "");
   const [suggestions, setSuggestions] = useState([]);
-  const [selected, setSelected] = useState(null);
-  const [surface, setSurface] = useState("");
-  const [propertyType, setPropertyType] = useState("Appartement");
-  const [terrainSurface, setTerrainSurface] = useState("");
-  const [vetuste, setVetuste] = useState(7);
+  const [selected, setSelected] = useState(form.selected ?? null);
+  const [surface, setSurface] = useState(form.surface ?? "");
+  const [propertyType, setPropertyType] = useState(form.propertyType ?? "Appartement");
+  const [terrainSurface, setTerrainSurface] = useState(form.terrainSurface ?? "");
+  const [vetuste, setVetuste] = useState(form.vetuste ?? 7);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [result, setResult] = useState(null);
-  const [recentSales, setRecentSales] = useState([]);
+  const [result, setResult] = useState(form.result ?? null);
+  const [recentSales, setRecentSales] = useState(form.recentSales ?? []);
   const [selectedSale, setSelectedSale] = useState(null);
   const [debounceTimer, setDebounceTimer] = useState(null);
+  const addressRef = useRef(null);
+
+  // Conservation de l'état lors des changements d'onglet.
+  useEffect(() => {
+    update({ query, selected, surface, propertyType, terrainSurface, vetuste, result, recentSales });
+  }, [query, selected, surface, propertyType, terrainSurface, vetuste, result, recentSales, update]);
+
+  // Fermeture de la liste de suggestions au toucher en dehors.
+  useEffect(() => {
+    if (suggestions.length === 0) return;
+    const handler = (e) => {
+      if (addressRef.current && !addressRef.current.contains(e.target)) setSuggestions([]);
+    };
+    document.addEventListener("mousedown", handler);
+    document.addEventListener("touchstart", handler);
+    return () => {
+      document.removeEventListener("mousedown", handler);
+      document.removeEventListener("touchstart", handler);
+    };
+  }, [suggestions.length]);
 
   const onQueryChange = (value) => {
     setQuery(value);
@@ -218,7 +241,14 @@ export default function Estimation() {
     }
   }, [selected, surface, propertyType, terrainSurface, vetuste]);
 
+  const handleRefresh = useCallback(async () => {
+    if (selected && surface && Number(surface) > 0) {
+      await estimate();
+    }
+  }, [selected, surface, estimate]);
+
   return (
+    <PullToRefresh onRefresh={handleRefresh}>
     <div className="min-h-screen bg-background">
       <header className="hidden md:block border-b border-border/60 bg-card/70 backdrop-blur-sm sticky top-0 z-20">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -249,7 +279,7 @@ export default function Estimation() {
         <Card className="mb-6 shadow-soft">
           <CardContent className="pt-6 space-y-4">
             {/* Adresse */}
-            <div className="relative">
+            <div className="relative" ref={addressRef}>
               <Label htmlFor="address" className="text-primary font-medium">Adresse du bien</Label>
               <div className="relative mt-1.5">
                 <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-accent" />
@@ -262,12 +292,12 @@ export default function Estimation() {
                 />
               </div>
               {suggestions.length > 0 && (
-                <div className="absolute z-10 mt-1.5 w-full rounded-xl border border-border/60 bg-popover shadow-soft max-h-60 overflow-auto">
+                <div data-scrollable className="absolute z-10 mt-1.5 w-full rounded-xl border border-border/60 bg-popover shadow-soft max-h-60 overflow-auto overscroll-contain">
                   {suggestions.map((f, i) => (
                     <button
                       key={i}
                       onClick={() => selectAddress(f)}
-                      className="w-full text-left px-3.5 py-2.5 hover:bg-accent/10 border-b border-border/40 last:border-b-0 transition-colors"
+                      className="w-full text-left px-3.5 py-3 min-h-[44px] hover:bg-accent/10 border-b border-border/40 last:border-b-0 transition-colors"
                     >
                       <div className="text-sm font-medium text-primary">{f.properties.label}</div>
                       {f.properties.context && (
@@ -470,12 +500,8 @@ export default function Estimation() {
           </>
         )}
 
-        <AdBanner />
-
         <footer className="mt-10 pt-6 border-t border-border/60 text-center text-xs text-muted-foreground">
-          <Link to="/mentions-legales" className="hover:text-accent hover:underline">Mentions légales</Link>
-          <span className="mx-2">·</span>
-          <Link to="/confidentialite" className="hover:text-accent hover:underline">Confidentialité</Link>
+          <LegalLinks />
         </footer>
 
         <SaleDetailDialog
@@ -485,5 +511,6 @@ export default function Estimation() {
         />
       </main>
     </div>
+    </PullToRefresh>
   );
 }

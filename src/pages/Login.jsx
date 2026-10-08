@@ -9,6 +9,7 @@ import AuthLayout from "@/components/AuthLayout";
 import GoogleIcon from "@/components/GoogleIcon";
 import { safeReturnTo } from "@/lib/authReturnTo";
 import useSeo from "@/hooks/use-seo";
+import LegalLinks from "@/components/LegalLinks";
 
 export default function Login() {
   useSeo({ title: "Connexion | L'Indice Immo", path: "/login", noindex: true });
@@ -127,6 +128,7 @@ export default function Login() {
           )}
         </Button>
       </form>
+      <LegalLinks className="mt-6 text-center text-xs text-muted-foreground" />
     </AuthLayout>
   );
 }

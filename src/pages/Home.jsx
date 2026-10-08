@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { Link } from "react-router-dom";
 import { Home as HomeIcon, MapPin, Calculator, TrendingUp, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import useSeo from "@/hooks/use-seo";
+import PullToRefresh from "@/components/PullToRefresh";
+import LegalLinks from "@/components/LegalLinks";
 
 export default function Home() {
   useSeo({ title: "Estimation immobilière gratuite en ligne | L'Indice Immo", description: "Estimez gratuitement votre maison ou appartement à partir des ventes réelles de votre commune (DVF, données de l'État). Estimation indicative.", path: "/" });
+  const handleRefresh = useCallback(async () => {
+    await new Promise((r) => setTimeout(r, 600));
+  }, []);
   return (
+    <PullToRefresh onRefresh={handleRefresh}>
     <div className="min-h-screen bg-background">
       {/* Hero */}
       <section className="relative overflow-hidden border-b border-border/60">
@@ -78,13 +84,10 @@ export default function Home() {
       <footer className="border-t border-border/60">
         <div className="max-w-5xl mx-auto px-6 py-8 text-center text-sm text-muted-foreground space-y-3">
           <div>Données : Base Adresse Nationale & Demande de Valeurs Foncières (DVF) — data.gouv.fr</div>
-          <div className="text-xs">
-            <Link to="/mentions-legales" className="hover:text-accent hover:underline">Mentions légales</Link>
-            <span className="mx-2">·</span>
-            <Link to="/confidentialite" className="hover:text-accent hover:underline">Confidentialité</Link>
-          </div>
+          <LegalLinks className="text-xs" />
         </div>
       </footer>
     </div>
+    </PullToRefresh>
   );
 }

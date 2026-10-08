@@ -11,6 +11,7 @@ import GoogleIcon from "@/components/GoogleIcon";
 import { toast } from "@/components/ui/use-toast";
 import { safeReturnTo } from "@/lib/authReturnTo";
 import useSeo from "@/hooks/use-seo";
+import LegalLinks from "@/components/LegalLinks";
 
 export default function Register() {
   useSeo({ title: "Créer un compte | L'Indice Immo", path: "/register", noindex: true });
@@ -229,6 +230,7 @@ export default function Register() {
           )}
         </Button>
       </form>
+      <LegalLinks className="mt-6 text-center text-xs text-muted-foreground" />
     </AuthLayout>
   );
 }
