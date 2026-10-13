@@ -11,8 +11,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import SaleDetailDialog from "@/components/SaleDetailDialog";
 import VetusteSlider from "@/components/VetusteSlider";
 import PriceTrendCard from "@/components/PriceTrendCard";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { LOGO_MARK_URL } from "@/lib/branding";
 import useSeo from "@/hooks/use-seo";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { euro as makeEuro, getPropertyTypeLabel, getTranslations } from "@/lib/i18n";
 import { addEntry } from "@/lib/history";
 
@@ -64,6 +66,7 @@ export default function EstimationEngine({ locale = "fr" }) {
   });
   const euroFmt = makeEuro(locale);
   const { toast } = useToast();
+  const isMobile = useIsMobile();
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -312,7 +315,7 @@ export default function EstimationEngine({ locale = "fr" }) {
                 />
               </div>
               {suggestions.length > 0 && (
-                <div className="absolute z-10 mt-1.5 w-full rounded-xl border border-border/60 bg-popover shadow-soft max-h-60 overflow-auto">
+                <div className="hidden md:block absolute z-10 mt-1.5 w-full rounded-xl border border-border/60 bg-popover shadow-soft max-h-60 overflow-auto">
                   {suggestions.map((f, i) => (
                     <button
                       key={i}
@@ -327,6 +330,31 @@ export default function EstimationEngine({ locale = "fr" }) {
                   ))}
                 </div>
               )}
+
+              <Drawer
+                open={isMobile && suggestions.length > 0}
+                onOpenChange={(open) => { if (!open) setSuggestions([]); }}
+              >
+                <DrawerContent className="md:hidden max-h-[75vh]">
+                  <DrawerHeader className="text-left">
+                    <DrawerTitle>{t.addressLabel}</DrawerTitle>
+                  </DrawerHeader>
+                  <div className="px-4 pb-6 overflow-auto max-h-[55vh]">
+                    {suggestions.map((f, i) => (
+                      <button
+                        key={i}
+                        onClick={() => selectAddress(f)}
+                        className="w-full text-left px-3.5 py-3 hover:bg-accent/10 border-b border-border/40 last:border-b-0 transition-colors"
+                      >
+                        <div className="text-sm font-medium text-primary">{f.properties.label}</div>
+                        {f.properties.context && (
+                          <div className="text-xs text-muted-foreground">{f.properties.context}</div>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                </DrawerContent>
+              </Drawer>
             </div>
 
             {/* Surface */}

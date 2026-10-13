@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, Trash2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
 import useSeo from "@/hooks/use-seo";
+import { useAuth } from "@/lib/AuthContext";
+import { base44 } from "@/api/base44Client";
 
 function Section({ title, children }) {
   return (
@@ -15,6 +19,23 @@ function Section({ title, children }) {
 
 export default function Confidentialite() {
   useSeo({ title: "Politique de confidentialité | L'Indice Immo", description: "Politique de confidentialité de L'Indice Immo : collecte des données, cookies, analytics et droits RGPD.", path: "/confidentialite" });
+  const { isAuthenticated, logout } = useAuth();
+  const { toast } = useToast();
+  const [confirmDelete, setConfirmDelete] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+
+  const handleDeleteAccount = async () => {
+    setDeleting(true);
+    try {
+      await base44.functions.invoke("deleteAccount", {});
+      toast({ title: "Compte supprimé", description: "Votre compte a été supprimé définitivement." });
+      logout(false);
+    } catch (e) {
+      toast({ title: "Erreur", description: e?.message || "Échec de la suppression.", variant: "destructive" });
+      setDeleting(false);
+      setConfirmDelete(false);
+    }
+  };
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-3xl mx-auto px-6 py-10">
@@ -39,6 +60,27 @@ export default function Confidentialite() {
             <Section title="Vos droits (RGPD)">
               <p>Conformément à la réglementation européenne (RGPD) et à la loi Informatique et Libertés, bien que nous ne stockions pas de données personnelles nominatives via notre formulaire d'estimation, vous disposez d'un droit d'accès, de rectification et d'effacement des données qui pourraient vous concerner. Pour exercer ce droit, vous pouvez nous contacter à l'adresse suivante : webmaster@chevillette.fr</p>
             </Section>
+            {isAuthenticated && (
+              <Section title="Suppression de votre compte">
+                <p>Conformément aux règles du Google Play Store, vous pouvez demander la suppression définitive de votre compte et des données qui y sont associées. Cette action est irréversible.</p>
+                {!confirmDelete ? (
+                  <div>
+                    <Button variant="destructive" size="sm" onClick={() => setConfirmDelete(true)}>
+                      <Trash2 className="w-4 h-4" /> Supprimer mon compte
+                    </Button>
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap gap-2">
+                    <Button variant="destructive" size="sm" onClick={handleDeleteAccount} disabled={deleting}>
+                      {deleting ? "Suppression en cours…" : "Confirmer la suppression définitive"}
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={() => setConfirmDelete(false)} disabled={deleting}>
+                      Annuler
+                    </Button>
+                  </div>
+                )}
+              </Section>
+            )}
             <Section title="Modification de la politique de confidentialité">
               <p>L'éditeur se réserve le droit de modifier la présente politique de confidentialité à tout moment, notamment en fonction de l'évolution de la législation.</p>
             </Section>
