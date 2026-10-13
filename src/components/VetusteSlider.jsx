@@ -1,18 +1,15 @@
 import React from "react";
 import { Hammer, PaintRoller, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { getTranslations } from "@/lib/i18n";
 
-// Cartes de repère (milestones) cliquables affichées au-dessus du curseur.
-const MILESTONES = [
-  { value: 0, Icon: Hammer, title: "0 | À rénover", subtitle: "Gros œuvre (Toiture, Élec)" },
-  { value: 5, Icon: PaintRoller, title: "5 | Rafraîchissements", subtitle: "Peinture, Sols, Cuisine" },
-  { value: 10, Icon: Sparkles, title: "10 | État neuf", subtitle: "Récent, Garantie décennale" },
-];
+const ICONS = [Hammer, PaintRoller, Sparkles];
+const GOLD = "#eab308";
 
-const GOLD = "#eab308"; // yellow-500
+export default function VetusteSlider({ value, onChange, disabled, locale = "fr" }) {
+  const t = getTranslations(locale).vetuste;
+  const MILESTONES = t.milestones.map((m, i) => ({ value: [0, 5, 10][i], Icon: ICONS[i], title: m.title, subtitle: m.subtitle }));
 
-export default function VetusteSlider({ value, onChange, disabled }) {
-  // Détermine la carte la plus proche de la note actuelle pour la mise en valeur.
   const nearest = MILESTONES.reduce((best, m) =>
     Math.abs(value - m.value) < Math.abs(value - best.value) ? m : best, MILESTONES[0]
   );
@@ -55,7 +52,6 @@ export default function VetusteSlider({ value, onChange, disabled }) {
         input.vetuste-range:disabled { opacity: 0.5; cursor: not-allowed; }
       `}</style>
 
-      {/* Cartes de repère cliquables */}
       <div className="flex justify-between gap-2">
         {MILESTONES.map((m) => {
           const active = m.value === nearest.value;
@@ -80,12 +76,10 @@ export default function VetusteSlider({ value, onChange, disabled }) {
         })}
       </div>
 
-      {/* Note alignée à droite */}
       <div className="flex justify-end mt-4 mb-2">
-        <span className="text-sm font-bold text-yellow-500 tabular-nums">Note : {value} / 10</span>
+        <span className="text-sm font-bold text-yellow-500 tabular-nums">{t.score(value)}</span>
       </div>
 
-      {/* Curseur (range) — piste dorée remplie jusqu'au thumb */}
       <input
         type="range"
         min={0}
