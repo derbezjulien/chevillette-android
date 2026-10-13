@@ -11,10 +11,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import SaleDetailDialog from "@/components/SaleDetailDialog";
 import VetusteSlider from "@/components/VetusteSlider";
 import PriceTrendCard from "@/components/PriceTrendCard";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from "@/components/ui/drawer";
 import { LOGO_MARK_URL } from "@/lib/branding";
 import useSeo from "@/hooks/use-seo";
-import { useIsMobile } from "@/hooks/use-mobile";
 import { euro as makeEuro, getPropertyTypeLabel, getTranslations } from "@/lib/i18n";
 import { addEntry } from "@/lib/history";
 
@@ -66,7 +64,6 @@ export default function EstimationEngine({ locale = "fr" }) {
   });
   const euroFmt = makeEuro(locale);
   const { toast } = useToast();
-  const isMobile = useIsMobile();
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [selected, setSelected] = useState(null);
@@ -83,6 +80,7 @@ export default function EstimationEngine({ locale = "fr" }) {
   const [shouldRun, setShouldRun] = useState(false);
   const lastSavedSignature = useRef(null);
   const lastPrefillSig = useRef(null);
+  const addressRef = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -109,6 +107,21 @@ export default function EstimationEngine({ locale = "fr" }) {
     lastSavedSignature.current = [prefill.citycode, prefill.propertyType, prefill.surface, prefill.terrainSurface, prefill.vetuste].join("|");
     setShouldRun(true);
   }, [location.state]);
+
+  useEffect(() => {
+    if (suggestions.length === 0) return;
+    const handleOutside = (e) => {
+      if (addressRef.current && !addressRef.current.contains(e.target)) {
+        setSuggestions([]);
+      }
+    };
+    document.addEventListener("mousedown", handleOutside);
+    document.addEventListener("touchstart", handleOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleOutside);
+      document.removeEventListener("touchstart", handleOutside);
+    };
+  }, [suggestions.length]);
 
   const onQueryChange = (value) => {
     setQuery(value);
@@ -304,7 +317,7 @@ export default function EstimationEngine({ locale = "fr" }) {
         <Card className="mb-6 shadow-soft">
           <CardContent className="pt-6 space-y-4">
             {/* Adresse */}
-            <div className="relative">
+            <div className="relative" ref={addressRef}>
               <Label htmlFor="address" className="text-primary font-medium">{t.addressLabel}</Label>
               <div className="relative mt-1.5">
                 <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-accent" />
@@ -312,17 +325,22 @@ export default function EstimationEngine({ locale = "fr" }) {
                   id="address"
                   value={query}
                   onChange={(e) => onQueryChange(e.target.value)}
+                  onFocus={() => setTimeout(() => {
+                    const el = document.getElementById("address");
+                    if (el) el.scrollIntoView({ block: "start", behavior: "smooth" });
+                  }, 300)}
                   placeholder={t.addressPlaceholder}
                   className="pl-10"
                 />
               </div>
               {suggestions.length > 0 && (
-                <div className="hidden md:block absolute z-10 mt-1.5 w-full rounded-xl border border-border/60 bg-popover shadow-soft max-h-60 overflow-auto">
+                <div className="absolute z-20 mt-1.5 w-full rounded-xl border border-border/60 bg-popover shadow-soft max-h-[40vh] overflow-y-auto">
                   {suggestions.map((f, i) => (
                     <button
                       key={i}
+                      type="button"
                       onClick={() => selectAddress(f)}
-                      className="w-full text-left px-3.5 py-2.5 hover:bg-accent/10 border-b border-border/40 last:border-b-0 transition-colors"
+                      className="w-full min-h-[48px] flex flex-col justify-center text-left px-3.5 py-2.5 hover:bg-accent/10 border-b border-border/40 last:border-b-0 transition-colors"
                     >
                       <div className="text-sm font-medium text-primary">{f.properties.label}</div>
                       {f.properties.context && (
@@ -332,31 +350,6 @@ export default function EstimationEngine({ locale = "fr" }) {
                   ))}
                 </div>
               )}
-
-              <Drawer
-                open={isMobile && suggestions.length > 0}
-                onOpenChange={(open) => { if (!open) setSuggestions([]); }}
-              >
-                <DrawerContent className="md:hidden max-h-[75vh]">
-                  <DrawerHeader className="text-left">
-                    <DrawerTitle>{t.addressLabel}</DrawerTitle>
-                  </DrawerHeader>
-                  <div className="px-4 pb-6 overflow-auto max-h-[55vh]">
-                    {suggestions.map((f, i) => (
-                      <button
-                        key={i}
-                        onClick={() => selectAddress(f)}
-                        className="w-full text-left px-3.5 py-3 hover:bg-accent/10 border-b border-border/40 last:border-b-0 transition-colors"
-                      >
-                        <div className="text-sm font-medium text-primary">{f.properties.label}</div>
-                        {f.properties.context && (
-                          <div className="text-xs text-muted-foreground">{f.properties.context}</div>
-                        )}
-                      </button>
-                    ))}
-                  </div>
-                </DrawerContent>
-              </Drawer>
             </div>
 
             {/* Surface */}
