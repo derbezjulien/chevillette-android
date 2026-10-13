@@ -82,13 +82,15 @@ export default function EstimationEngine({ locale = "fr" }) {
   const [debounceTimer, setDebounceTimer] = useState(null);
   const [shouldRun, setShouldRun] = useState(false);
   const lastSavedSignature = useRef(null);
-  const ranPrefillRef = useRef(false);
+  const lastPrefillSig = useRef(null);
   const location = useLocation();
 
   useEffect(() => {
     const prefill = location.state?.prefill;
-    if (!prefill || ranPrefillRef.current) return;
-    ranPrefillRef.current = true;
+    if (!prefill) return;
+    const sig = [prefill.citycode, prefill.addressLabel, prefill.propertyType, prefill.surface, prefill.terrainSurface, prefill.vetuste].join("|");
+    if (sig === lastPrefillSig.current) return;
+    lastPrefillSig.current = sig;
     setQuery(prefill.addressLabel || "");
     setSelected({
       properties: {
