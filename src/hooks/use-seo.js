@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const SITE_NAME = "Chevillette";
 
@@ -35,7 +36,10 @@ export function applySeo(doc, { title, description = "", locale = "fr_FR", lang 
 }
 
 export default function useSeo({ title, description, path, noindex, locale, lang } = {}) {
+  const { pathname } = useLocation();
   useEffect(() => {
+    // En mode keep-alive, n'applique le SEO que pour la page réellement active.
+    if (path && pathname !== path) return;
     applySeo(document, { title, description, locale, lang });
-  }, [title, description, locale, lang]);
+  }, [title, description, locale, lang, pathname, path]);
 }

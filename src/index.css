@@ -94,14 +94,36 @@
     overscroll-behavior-y: none;
   }
 
-  /* Empêche le surlignage/la sélection sur les éléments interactifs (WebView Android) */
+  /* Masque les barres de défilement WebKit sur les conteneurs scrollables (défilement intact) */
+  *::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Empêche le surlignage/la sélection sur les éléments interactifs et wrappers personnalisés (WebView Android) */
   button,
   input,
   textarea,
-  [role="tab"] {
+  [role="tab"],
+  [role="button"],
+  [data-vaul-drawer],
+  [data-vaul-drawer-wrapper] {
     -webkit-user-select: none;
     user-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* La sélection de texte reste active pour les passages de texte brut (contenu éditorial) */
+  p,
+  li,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  blockquote {
+    -webkit-user-select: text;
+    user-select: text;
   }
 }
