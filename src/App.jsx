@@ -16,11 +16,13 @@ import Confidentialite from '@/pages/Confidentialite';
 import ConditionsUtilisation from '@/pages/ConditionsUtilisation';
 import CommentCaMarche from '@/pages/CommentCaMarche';
 import APropos from '@/pages/APropos';
+import Historique from '@/pages/Historique';
 import EnHome from '@/pages/en/Home';
 import EnEstimate from '@/pages/en/Estimate';
 import EnHowItWorks from '@/pages/en/HowItWorks';
 import EnAbout from '@/pages/en/About';
 import EnPrivacyPolicy from '@/pages/en/PrivacyPolicy';
+import EnHistory from '@/pages/en/History';
 import SiteFooter from '@/components/SiteFooter';
 import AnimatedLayout from '@/components/AnimatedLayout';
 import { EstimationFormProvider } from '@/context/EstimationFormContext';
@@ -48,11 +50,13 @@ const AuthenticatedApp = () => {
           <Route path="/conditions-utilisation" element={<ConditionsUtilisation />} />
           <Route path="/comment-ca-marche" element={<CommentCaMarche />} />
           <Route path="/a-propos" element={<APropos />} />
+          <Route path="/historique" element={<Historique />} />
           <Route path="/en" element={<EnHome />} />
           <Route path="/en/estimate" element={<EnEstimate />} />
           <Route path="/en/how-it-works" element={<EnHowItWorks />} />
           <Route path="/en/about" element={<EnAbout />} />
           <Route path="/en/privacy-policy" element={<EnPrivacyPolicy />} />
+          <Route path="/en/history" element={<EnHistory />} />
         </Route>
         <Route path="*" element={<PageNotFound />} />
       </Routes>

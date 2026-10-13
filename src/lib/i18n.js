@@ -147,6 +147,23 @@ export const translations = {
       download: "Télécharger mon estimation (PDF)",
       filename: "estimation-immo.pdf",
     },
+    history: {
+      seo: {
+        title: "Historique de mes estimations | Chevillette.fr",
+        description: "Retrouvez vos estimations précédentes, conservées uniquement sur votre appareil.",
+        path: "/historique",
+      },
+      h1: "Historique des estimations",
+      emptyText: "Aucune estimation enregistrée pour l'instant. Vos estimations apparaîtront ici, uniquement sur cet appareil.",
+      clearAll: "Tout effacer",
+      confirmClear: "Confirmer",
+      cancel: "Annuler",
+      reopen: "Rouvrir",
+      remove: "Supprimer",
+      pricePerSqm: "Prix au m²",
+      landShort: (n) => `terrain ${n} m²`,
+      deviceNote: "L'historique est conservé uniquement sur votre appareil et n'est jamais envoyé à nos serveurs.",
+    },
   },
   en: {
     estimation: {
@@ -264,6 +281,23 @@ export const translations = {
       generating: "Generating…",
       download: "Download my estimate (PDF)",
       filename: "property-estimate.pdf",
+    },
+    history: {
+      seo: {
+        title: "My estimate history | Chevillette.fr",
+        description: "Find your previous estimates, stored only on your device.",
+        path: "/en/history",
+      },
+      h1: "Estimate history",
+      emptyText: "No estimate saved yet. Your estimates will appear here, only on this device.",
+      clearAll: "Clear all",
+      confirmClear: "Confirm",
+      cancel: "Cancel",
+      reopen: "Reopen",
+      remove: "Delete",
+      pricePerSqm: "Price per m²",
+      landShort: (n) => `land ${n} m²`,
+      deviceNote: "The history is stored only on your device and is never sent to our servers.",
     },
   },
 };

@@ -1,16 +1,18 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Home as HomeIcon, Calculator } from "lucide-react";
+import { Home as HomeIcon, Calculator, History as HistoryIcon } from "lucide-react";
 
-const ROUTES = ["/", "/estimation", "/en", "/en/estimate"];
+const ROUTES = ["/", "/estimation", "/historique", "/en", "/en/estimate", "/en/history"];
 const TABS_BY_LANG = {
   fr: [
     { path: "/", label: "Accueil", Icon: HomeIcon },
     { path: "/estimation", label: "Estimation", Icon: Calculator },
+    { path: "/historique", label: "Historique", Icon: HistoryIcon },
   ],
   en: [
     { path: "/en", label: "Home", Icon: HomeIcon },
     { path: "/en/estimate", label: "Estimate", Icon: Calculator },
+    { path: "/en/history", label: "History", Icon: HistoryIcon },
   ],
 };
 

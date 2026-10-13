@@ -31,12 +31,13 @@ export default function Confidentialite() {
             </p>
             <Section title="Collecte des données">
               <p>L'utilisation de l'outil d'estimation est gratuite et ne nécessite pas la création d'un compte utilisateur. Les données que vous saisissez dans le formulaire (adresse du bien, surface, état) sont traitées instantanément par notre algorithme pour générer l'estimation. Ces données ne sont ni sauvegardées dans nos bases de données, ni revendues à des tiers. L'adresse saisie n'est conservée que le temps de votre session de navigation pour vous afficher le résultat.</p>
+              <p>Si vous utilisez l'historique de l'application, vos estimations précédentes (adresse, surface, résultat) sont conservées uniquement sur votre appareil. Elles ne sont jamais envoyées à nos serveurs. Vous pouvez les supprimer à tout moment depuis l'application ou en la désinstallant.</p>
             </Section>
             <Section title="Données de navigation (Analytics)">
               <p>Nous pouvons être amenés à utiliser des outils de mesure d'audience anonymes pour comprendre comment notre site est utilisé et l'améliorer (pages visitées, temps passé, type d'appareil). Ces données sont anonymisées et ne permettent pas de vous identifier personnellement.</p>
             </Section>
             <Section title="Vos droits (RGPD)">
-              <p>Conformément à la réglementation européenne (RGPD) et à la loi Informatique et Libertés, bien que nous ne stockions pas de données personnelles nominatives via notre formulaire d'estimation, vous disposez d'un droit d'accès, de rectification et d'effacement des données qui pourraient vous concerner. Pour exercer ce droit, vous pouvez nous contacter à l'adresse suivante : derbez.julien@indiceimmo.org</p>
+              <p>Conformément à la réglementation européenne (RGPD) et à la loi Informatique et Libertés, bien que nous ne stockions pas de données personnelles nominatives via notre formulaire d'estimation, vous disposez d'un droit d'accès, de rectification et d'effacement des données qui pourraient vous concerner. Pour exercer ce droit, vous pouvez nous contacter à l'adresse suivante : webmaster@chevillette.fr</p>
             </Section>
             <Section title="Modification de la politique de confidentialité">
               <p>L'éditeur se réserve le droit de modifier la présente politique de confidentialité à tout moment, notamment en fonction de l'évolution de la législation.</p>

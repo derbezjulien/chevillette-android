@@ -45,6 +45,7 @@ export default function PrivacyPolicy() {
             <Section title="1. Data collection">
               <p>Use of the estimation tool is free and does not require the creation of a user account.</p>
               <p>The data you enter in the form (property address, surface area, condition) is processed instantly by our algorithm to generate the estimate. This data is neither saved in our databases nor sold to third parties. The address you enter is kept only for the duration of your browsing session, in order to display the result.</p>
+              <p>If you use the app's history, your previous estimates (address, area, result) are stored only on your device. They are never sent to our servers. You can delete them at any time from the app or by uninstalling it.</p>
             </Section>
             <Section title="2. Browsing data (analytics)">
               <p>We may use anonymous audience measurement tools to understand how our site is used and to improve it (pages visited, time spent, type of device). This data is anonymised and does not allow us to identify you personally.</p>

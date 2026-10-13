@@ -3,9 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronLeft, Home as HomeIcon } from "lucide-react";
 
 const ROUTES = [
-  "/", "/estimation", "/comment-ca-marche", "/a-propos",
+  "/", "/estimation", "/historique", "/comment-ca-marche", "/a-propos",
   "/mentions-legales", "/confidentialite", "/conditions-utilisation",
-  "/en", "/en/estimate", "/en/how-it-works", "/en/about", "/en/privacy-policy",
+  "/en", "/en/estimate", "/en/history", "/en/how-it-works", "/en/about", "/en/privacy-policy",
 ];
 const TITLES = {
   "/": "Chevillette.fr",
@@ -20,6 +20,8 @@ const TITLES = {
   "/en/how-it-works": "How it works",
   "/en/about": "About",
   "/en/privacy-policy": "Privacy policy",
+  "/historique": "Historique",
+  "/en/history": "History",
 };
 const EQUIVALENT = {
   "/": "/en",
@@ -32,6 +34,8 @@ const EQUIVALENT = {
   "/en/how-it-works": "/comment-ca-marche",
   "/en/about": "/a-propos",
   "/en/privacy-policy": "/confidentialite",
+  "/historique": "/en/history",
+  "/en/history": "/historique",
 };
 
 export default function MobileHeader() {

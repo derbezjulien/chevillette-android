@@ -1,5 +1,5 @@
-import React, { useState, useCallback } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useCallback, useEffect, useRef } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { Home as HomeIcon, MapPin, Calculator, Loader2, AlertCircle, Building2, TrendingUp, Trees } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import PriceTrendCard from "@/components/PriceTrendCard";
 import { LOGO_MARK_URL } from "@/lib/branding";
 import useSeo from "@/hooks/use-seo";
 import { euro as makeEuro, getPropertyTypeLabel, getTranslations } from "@/lib/i18n";
+import { addEntry } from "@/lib/history";
 
 function formatYear(dateIso) {
   return dateIso ? dateIso.substring(0, 4) : "—";
@@ -76,6 +77,33 @@ export default function EstimationEngine({ locale = "fr" }) {
   const [recentSales, setRecentSales] = useState([]);
   const [selectedSale, setSelectedSale] = useState(null);
   const [debounceTimer, setDebounceTimer] = useState(null);
+  const [shouldRun, setShouldRun] = useState(false);
+  const lastSavedSignature = useRef(null);
+  const ranPrefillRef = useRef(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    const prefill = location.state?.prefill;
+    if (!prefill || ranPrefillRef.current) return;
+    ranPrefillRef.current = true;
+    setQuery(prefill.addressLabel || "");
+    setSelected({
+      properties: {
+        citycode: prefill.citycode,
+        city: prefill.city,
+        name: prefill.city,
+        label: prefill.addressLabel,
+        postcode: prefill.postcode,
+        context: prefill.postcode,
+      },
+    });
+    setSurface(String(prefill.surface ?? ""));
+    setPropertyType(prefill.propertyType || "Appartement");
+    setTerrainSurface(prefill.terrainSurface ? String(prefill.terrainSurface) : "");
+    setVetuste(prefill.vetuste ?? 7);
+    lastSavedSignature.current = [prefill.citycode, prefill.propertyType, prefill.surface, prefill.terrainSurface, prefill.vetuste].join("|");
+    setShouldRun(true);
+  }, [location.state]);
 
   const onQueryChange = (value) => {
     setQuery(value);
@@ -158,6 +186,23 @@ export default function EstimationEngine({ locale = "fr" }) {
         }));
 
       setResult({ estimatedPrice, averagePricePerSqm: avgPerSqm, sampleSize: sales.length, trendData });
+      const sig = [citycode, propertyType, surface, terrainSurface, vetuste].join("|");
+      if (sig !== lastSavedSignature.current) {
+        lastSavedSignature.current = sig;
+        addEntry({
+          addressLabel: selected.properties.label,
+          city: commune,
+          postcode: selected.properties.postcode || "",
+          citycode,
+          propertyType,
+          surface: Number(surface),
+          terrainSurface: Number(terrainSurface) || 0,
+          vetuste: Number(vetuste),
+          estimatedValue: Math.round(estimatedPrice),
+          pricePerSqm: Math.round(avgPerSqm),
+          locale,
+        });
+      }
       setRecentSales(
         [...sales]
           .sort((a, b) => (b.date_mutation || "").localeCompare(a.date_mutation || ""))
@@ -202,6 +247,23 @@ export default function EstimationEngine({ locale = "fr" }) {
               fallback: true,
               fallbackCommune: selected.properties.city || selected.properties.name || "",
             });
+            const sig = [citycode, propertyType, surface, terrainSurface, vetuste].join("|");
+            if (sig !== lastSavedSignature.current) {
+              lastSavedSignature.current = sig;
+              addEntry({
+                addressLabel: selected.properties.label,
+                city: selected.properties.city || selected.properties.name || "",
+                postcode: selected.properties.postcode || "",
+                citycode,
+                propertyType,
+                surface: Number(surface),
+                terrainSurface: Number(terrainSurface) || 0,
+                vetuste: Number(vetuste),
+                estimatedValue: Math.round(estimatedPrice),
+                pricePerSqm: Math.round(avgPerSqm),
+                locale,
+              });
+            }
             setRecentSales([]);
           } else {
             setError(t.errorServerNoRef);
@@ -216,6 +278,13 @@ export default function EstimationEngine({ locale = "fr" }) {
       setLoading(false);
     }
   }, [selected, surface, propertyType, terrainSurface, vetuste, locale, t]);
+
+  useEffect(() => {
+    if (shouldRun && selected && surface) {
+      setShouldRun(false);
+      estimate();
+    }
+  }, [shouldRun, selected, surface, estimate]);
 
   return (
     <div className="min-h-screen bg-background">

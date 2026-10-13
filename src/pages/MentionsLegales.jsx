@@ -34,7 +34,7 @@ export default function MentionsLegales() {
               <p>Nom / Prénom : Julien Derbez</p>
               <p>Statut : Particulier</p>
               <p>Adresse de domiciliation : 33410 Cadillac</p>
-              <p>Email de contact : derbez.julien@indiceimmo.org</p>
+              <p>Email de contact : webmaster@chevillette.fr</p>
             </Section>
             <Section title="Directeur de la publication">
               <p>Le Directeur de la publication est : Julien Derbez</p>
