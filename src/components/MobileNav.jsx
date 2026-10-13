@@ -2,16 +2,24 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Home as HomeIcon, Calculator } from "lucide-react";
 
-const ROUTES = ["/", "/estimation"];
-const TABS = [
-  { path: "/", label: "Accueil", Icon: HomeIcon },
-  { path: "/estimation", label: "Estimation", Icon: Calculator },
-];
+const ROUTES = ["/", "/estimation", "/en", "/en/estimate"];
+const TABS_BY_LANG = {
+  fr: [
+    { path: "/", label: "Accueil", Icon: HomeIcon },
+    { path: "/estimation", label: "Estimation", Icon: Calculator },
+  ],
+  en: [
+    { path: "/en", label: "Home", Icon: HomeIcon },
+    { path: "/en/estimate", label: "Estimate", Icon: Calculator },
+  ],
+};
 
 export default function MobileNav() {
   const location = useLocation();
   const navigate = useNavigate();
   if (!ROUTES.includes(location.pathname)) return null;
+  const isEn = location.pathname.startsWith("/en");
+  const TABS = isEn ? TABS_BY_LANG.en : TABS_BY_LANG.fr;
 
   return (
     <nav

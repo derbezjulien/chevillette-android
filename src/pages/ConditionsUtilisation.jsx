@@ -23,7 +23,7 @@ export default function ConditionsUtilisation() {
         </Link>
         <Card className="shadow-soft">
           <CardHeader>
-            <CardTitle className="text-2xl">Conditions d'utilisation</CardTitle>
+            <h1 className="text-2xl font-semibold leading-none tracking-tight">Conditions d'utilisation</h1>
           </CardHeader>
           <CardContent>
             <Section title="Objet">

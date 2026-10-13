@@ -3,27 +3,45 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronLeft, Home as HomeIcon } from "lucide-react";
 
 const ROUTES = [
-  "/",
-  "/estimation",
-  "/mentions-legales",
-  "/confidentialite",
-  "/conditions-utilisation",
+  "/", "/estimation", "/comment-ca-marche", "/a-propos",
+  "/mentions-legales", "/confidentialite", "/conditions-utilisation",
+  "/en", "/en/estimate", "/en/how-it-works", "/en/about", "/en/privacy-policy",
 ];
 const TITLES = {
-  "/": "L'Indice Immo",
+  "/": "Chevillette.fr",
   "/estimation": "Estimation",
-  "/mentions-legales": "Mentions Légales",
+  "/comment-ca-marche": "Comment ça marche",
+  "/a-propos": "À propos",
+  "/mentions-legales": "Mentions légales",
   "/confidentialite": "Confidentialité",
   "/conditions-utilisation": "Conditions d'utilisation",
+  "/en": "Chevillette.fr",
+  "/en/estimate": "Estimate",
+  "/en/how-it-works": "How it works",
+  "/en/about": "About",
+  "/en/privacy-policy": "Privacy policy",
+};
+const EQUIVALENT = {
+  "/": "/en",
+  "/estimation": "/en/estimate",
+  "/comment-ca-marche": "/en/how-it-works",
+  "/a-propos": "/en/about",
+  "/confidentialite": "/en/privacy-policy",
+  "/en": "/",
+  "/en/estimate": "/estimation",
+  "/en/how-it-works": "/comment-ca-marche",
+  "/en/about": "/a-propos",
+  "/en/privacy-policy": "/confidentialite",
 };
 
 export default function MobileHeader() {
   const navigate = useNavigate();
   const location = useLocation();
   if (!ROUTES.includes(location.pathname)) return null;
-  const TAB_ROOTS = ["/", "/estimation"];
-  const canBack = !TAB_ROOTS.includes(location.pathname);
-  const isHome = location.pathname === "/";
+  const isEn = location.pathname.startsWith("/en");
+  const isHome = location.pathname === "/" || location.pathname === "/en";
+  const canBack = !isHome;
+  const equivalent = EQUIVALENT[location.pathname] || (isEn ? "/" : "/en");
 
   return (
     <header
@@ -44,13 +62,28 @@ export default function MobileHeader() {
           </span>
           {isHome ? (
             <span className="font-serif text-2xl font-semibold tracking-tight text-accent">
-              L'Indice Immo
+              Chevillette.fr
             </span>
           ) : (
             <span className="font-heading font-semibold text-primary">{TITLES[location.pathname]}</span>
           )}
         </div>
-        <div className="w-10" />
+        <div className="flex items-center rounded-full border border-border/60 bg-card/60 overflow-hidden text-xs font-bold">
+          <button
+            type="button"
+            onClick={() => isEn && navigate(equivalent, { replace: true })}
+            className={`h-10 px-3 flex items-center transition-colors ${!isEn ? "bg-accent text-accent-foreground" : "text-muted-foreground"}`}
+          >
+            FR
+          </button>
+          <button
+            type="button"
+            onClick={() => !isEn && navigate(equivalent, { replace: true })}
+            className={`h-10 px-3 flex items-center transition-colors ${isEn ? "bg-accent text-accent-foreground" : "text-muted-foreground"}`}
+          >
+            EN
+          </button>
+        </div>
       </div>
     </header>
   );

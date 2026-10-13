@@ -1,0 +1,22 @@
+{
+  "name": "Chevillette",
+  "short_name": "Chevillette",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#0F1B2A",
+  "background_color": "#0F1B2A",
+  "icons": [
+    {
+      "src": "https://media.base44.com/images/public/6ac90510e5b74648f57551d3/75b20fdb4_icon-512.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "https://media.base44.com/images/public/6ac90510e5b74648f57551d3/75b20fdb4_icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

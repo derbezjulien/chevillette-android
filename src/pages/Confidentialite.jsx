@@ -23,7 +23,7 @@ export default function Confidentialite() {
         </Link>
         <Card className="shadow-soft">
           <CardHeader>
-            <CardTitle className="text-2xl">Politique de confidentialité</CardTitle>
+            <h1 className="text-2xl font-semibold leading-none tracking-tight">Politique de confidentialité</h1>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
