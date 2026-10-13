@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { ChevronLeft, Home as HomeIcon } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
+import { LOGO_MARK_URL } from "@/lib/branding";
 
 const ROUTES = [
   "/", "/estimation", "/historique", "/comment-ca-marche", "/a-propos",
@@ -49,41 +50,45 @@ export default function MobileHeader() {
 
   return (
     <header
-      className="md:hidden sticky top-0 z-30 bg-card/90 backdrop-blur-sm border-b border-border/60"
+      className="md:hidden sticky top-0 z-30 bg-[#0F1B2A] border-b border-[#CBA328]/20"
       style={{ paddingTop: "env(safe-area-inset-top)" }}
     >
-      <div className="flex items-center justify-between py-4" style={{ paddingLeft: "calc(env(safe-area-inset-left) + 0.5rem)", paddingRight: "calc(env(safe-area-inset-right) + 0.5rem)" }}>
+      <div className="flex items-center justify-between py-3" style={{ paddingLeft: "calc(env(safe-area-inset-left) + 0.5rem)", paddingRight: "calc(env(safe-area-inset-right) + 0.5rem)" }}>
         <button
           type="button"
           onClick={() => canBack && navigate(-1)}
-          className={`w-10 h-10 flex items-center justify-center rounded-xl text-primary ${canBack ? "" : "opacity-0 pointer-events-none"}`}
+          className={`w-10 h-10 flex items-center justify-center rounded-xl text-white ${canBack ? "" : "opacity-0 pointer-events-none"}`}
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
-        <div className="flex items-center justify-center gap-3">
-          <span className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-primary dark:bg-card text-accent ring-1 ring-accent/30">
-            <HomeIcon className="w-8 h-8" />
-          </span>
+        <div className="flex items-center gap-2 min-w-0">
+          <img
+            src={LOGO_MARK_URL}
+            alt="Chevillette"
+            className="h-9 w-auto object-contain shrink-0"
+            style={{ height: "36px" }}
+          />
           {isHome ? (
-            <span className="font-serif text-2xl font-semibold tracking-tight text-accent">
-              Chevillette.fr
+            <span className="font-heading font-bold text-xl whitespace-nowrap">
+              <span className="text-white">chevillette</span>
+              <span className="text-[#CBA328]">.fr</span>
             </span>
           ) : (
-            <span className="font-heading font-semibold text-primary">{TITLES[location.pathname]}</span>
+            <span className="font-heading font-semibold text-white whitespace-nowrap">{TITLES[location.pathname]}</span>
           )}
         </div>
-        <div className="flex items-center rounded-full border border-border/60 bg-card/60 overflow-hidden text-xs font-bold">
+        <div className="flex items-center rounded-full border border-[#CBA328]/30 bg-white/5 overflow-hidden text-xs font-bold shrink-0">
           <button
             type="button"
             onClick={() => isEn && navigate(equivalent, { replace: true })}
-            className={`h-10 px-3 flex items-center transition-colors ${!isEn ? "bg-accent text-accent-foreground" : "text-muted-foreground"}`}
+            className={`h-10 px-3 flex items-center transition-colors ${!isEn ? "bg-[#CBA328] text-[#0F1B2A]" : "text-white/70"}`}
           >
             FR
           </button>
           <button
             type="button"
             onClick={() => !isEn && navigate(equivalent, { replace: true })}
-            className={`h-10 px-3 flex items-center transition-colors ${isEn ? "bg-accent text-accent-foreground" : "text-muted-foreground"}`}
+            className={`h-10 px-3 flex items-center transition-colors ${isEn ? "bg-[#CBA328] text-[#0F1B2A]" : "text-white/70"}`}
           >
             EN
           </button>
