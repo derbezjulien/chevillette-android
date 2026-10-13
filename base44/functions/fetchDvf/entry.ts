@@ -81,7 +81,7 @@ async function fetchYear(citycode: string, year: number, dep: string): Promise<R
     log("info", `Téléchargement ${url}`);
     const res = await fetch(url, {
       signal: controller.signal,
-      headers: { Accept: "text/csv", "User-Agent": "ImmoEstime/1.0 (+base44)" },
+      headers: { Accept: "text/csv", "User-Agent": "Chevillette/1.0 (+base44)" },
     });
     const elapsed = Date.now() - t0;
     if (res.status === 404) {

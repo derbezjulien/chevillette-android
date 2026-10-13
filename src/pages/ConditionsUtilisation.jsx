@@ -14,7 +14,7 @@ function Section({ title, children }) {
 }
 
 export default function ConditionsUtilisation() {
-  useSeo({ title: "Conditions d'utilisation | L'Indice Immo", description: "Conditions d'utilisation de L'Indice Immo, application d'estimation immobilière indicative.", path: "/conditions-utilisation" });
+  useSeo({ title: "Conditions d'utilisation | Chevillette", description: "Conditions d'utilisation de Chevillette, application gratuite d'estimation immobilière indicative.", path: "/conditions-utilisation" });
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-3xl mx-auto px-6 py-10">
@@ -27,13 +27,13 @@ export default function ConditionsUtilisation() {
           </CardHeader>
           <CardContent>
             <Section title="Objet">
-              <p>Les présentes conditions d'utilisation régissent l'utilisation de L'Indice Immo, application proposant une estimation immobilière indicative fondée sur des données publiques.</p>
+              <p>Les présentes conditions d'utilisation régissent l'utilisation de Chevillette, application gratuite ne nécessitant aucun compte utilisateur, proposant une estimation immobilière indicative fondée sur des données publiques.</p>
             </Section>
             <Section title="Acceptation">
               <p>L'utilisation de l'application implique l'acceptation pleine et entière des présentes conditions. Si vous n'acceptez pas ces conditions, veuillez ne pas utiliser l'application.</p>
             </Section>
             <Section title="Description du service">
-              <p>L'application permet d'obtenir une estimation indicative de la valeur d'un bien immobilier à partir de son adresse, de sa surface et des ventes réelles enregistrées dans la commune (Demandes de Valeurs Foncières, data.gouv.fr).</p>
+              <p>L'application permet d'obtenir gratuitement une estimation indicative de la valeur d'un bien immobilier à partir de son adresse, de sa surface et des ventes réelles enregistrées dans la commune (Demandes de Valeurs Foncières, data.gouv.fr). Aucune inscription n'est requise.</p>
               <p>Cette estimation est fournie à titre indicatif et ne constitue pas une expertise, une évaluation officielle ni un engagement de prix.</p>
             </Section>
             <Section title="Utilisation de l'application">

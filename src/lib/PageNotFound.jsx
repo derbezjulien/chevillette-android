@@ -3,7 +3,7 @@ import useSeo from '@/hooks/use-seo';
 
 
 export default function PageNotFound({}) {
-    useSeo({ title: "Page introuvable | L'Indice Immo", path: "/", noindex: true });
+    useSeo({ title: "Page introuvable | Chevillette", path: "/", noindex: true });
     const location = useLocation();
     const pageName = location.pathname.substring(1);
 

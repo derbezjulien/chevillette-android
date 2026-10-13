@@ -14,7 +14,7 @@ function Section({ title, children }) {
 }
 
 export default function MentionsLegales() {
-  useSeo({ title: "Mentions légales | L'Indice Immo", description: "Mentions légales de L'Indice Immo, application d'estimation immobilière indicative.", path: "/mentions-legales" });
+  useSeo({ title: "Mentions légales | Chevillette", description: "Mentions légales de Chevillette, application d'estimation immobilière indicative.", path: "/mentions-legales" });
   return (
     <div className="min-h-screen bg-background">
       <main className="max-w-3xl mx-auto px-6 py-10">
@@ -27,10 +27,10 @@ export default function MentionsLegales() {
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-              En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs du site internet L'Indice Immo (www.indiceimmo.org) l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi :
+              En vertu de l'article 6 de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans l'économie numérique, il est précisé aux utilisateurs de l'application Chevillette l'identité des différents intervenants dans le cadre de sa réalisation et de son suivi :
             </p>
-            <Section title="Éditeur du site">
-              <p>Le site L'Indice Immo est édité par :</p>
+            <Section title="Éditeur de l'application">
+              <p>L'application Chevillette est éditée par :</p>
               <p>Nom / Prénom : Julien Derbez</p>
               <p>Statut : Particulier</p>
               <p>Adresse de domiciliation : 33410 Cadillac</p>
@@ -40,16 +40,16 @@ export default function MentionsLegales() {
               <p>Le Directeur de la publication est : Julien Derbez</p>
             </Section>
             <Section title="Hébergement">
-              <p>Le site est hébergé par : IONOS SARL</p>
+              <p>L'application est hébergée par : IONOS SARL</p>
               <p>7, place de la Gare BP 70109</p>
               <p>57200 Sarreguemines Cedex France</p>
               <p>Site Web : https://www.ionos.fr</p>
             </Section>
             <Section title="Propriété intellectuelle">
-              <p>L'ensemble de ce site relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Le design, le code source, le logo &laquo; L'Indice Immo &raquo; et l'algorithme d'estimation sont la propriété exclusive de l'éditeur. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable.</p>
+              <p>L'ensemble de cette application relève de la législation française et internationale sur le droit d'auteur et la propriété intellectuelle. Le design, le code source, le logo &laquo; Chevillette &raquo; et l'algorithme d'estimation sont la propriété exclusive de l'éditeur. Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments de l'application, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable.</p>
             </Section>
             <Section title="Avertissement sur les estimations">
-              <p>Les estimations fournies par l'outil L'Indice Immo sont données à titre purement indicatif. Elles sont issues d'un algorithme croisant les données publiques de l'État (DVF - Demandes de Valeurs Foncières) et des indices mathématiques de vétusté. Ces résultats ne constituent en aucun cas une expertise immobilière officielle ou notariale et ne sauraient engager la responsabilité de l'éditeur en cas de transaction immobilière.</p>
+              <p>Les estimations fournies par l'outil Chevillette sont données à titre purement indicatif. Elles sont issues d'un algorithme croisant les données publiques de l'État (DVF - Demandes de Valeurs Foncières) et des indices mathématiques de vétusté. Ces résultats ne constituent en aucun cas une expertise immobilière officielle ou notariale et ne sauraient engager la responsabilité de l'éditeur en cas de transaction immobilière.</p>
             </Section>
           </CardContent>
         </Card>
